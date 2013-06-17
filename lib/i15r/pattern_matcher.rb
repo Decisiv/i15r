@@ -54,6 +54,7 @@ class I15R
                   match = m[group_name]
                   key = translation_key(match)
                   new_line = @transformer.transform(m, match, line, key)
+                end
               end
             end
           end
@@ -81,19 +82,19 @@ class I15R
       end
 
       private
-        def i18n_string(key, original)
-          if @add_default
-            if original.to_s[0] == ':'
-              original = original.to_s[1..-1]
-            end
-            unless original[0] == "'" or original[0] == '"'
-              original = %("#{original}")
-            end
-            %(#{@i18n_method}("#{key}", :default => #{original}))
-          else
-            %(#{@i18n_method}("#{key}"))
+      def i18n_string(key, original)
+        if @add_default
+          if original.to_s[0] == ':'
+            original = original.to_s[1..-1]
           end
+          unless original[0] == "'" or original[0] == '"'
+            original = %("#{original}")
+          end
+          %(#{@i18n_method}("#{key}", :default => #{original}))
+        else
+          %(#{@i18n_method}("#{key}"))
         end
+      end
     end
 
     class ErbTransformer < Transformer
@@ -115,10 +116,10 @@ class I15R
         return line if line.match /\bt\(/
         leading_whitespace = line[/^(\s+)/, 1]
         no_leading_whitespace = if leading_whitespace
-          line[leading_whitespace.size..-1]
-        else
-          line
-        end
+                                  line[leading_whitespace.size..-1]
+                                else
+                                  line
+                                end
         if ['/', '-'].include?(no_leading_whitespace[0])
           return line
         end
