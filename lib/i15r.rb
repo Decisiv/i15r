@@ -99,7 +99,7 @@ class I15R
       if config.interactive?
         key = @interface.edit_key(key, string)
       end
-      store_key(key, string)
+      store_key(key, string) unless key == :skip
       key # return key at end of block, in case it was changed
     end
     transformed_text + "\n"

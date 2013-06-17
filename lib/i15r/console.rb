@@ -32,10 +32,12 @@ EOF
       choices.each_with_index do |p, i|
         display "(#{i + 1}) #{p}"
       end
-      selection = ask("Please choose a key or enter one manually") do |q| q.default = '1' end
+      selection = ask("Please choose a key or enter one manually (or 'skip')") do |q| q.default = '1' end
 
       if (1..choices.size).include? selection.to_i
         choices[selection.to_i - 1]
+      elsif selection =~ /skip/
+        :skip
       else
         selection
       end

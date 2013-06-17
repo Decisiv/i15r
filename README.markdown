@@ -147,7 +147,7 @@ Key options for users.new.name
 with value: Name
 (1) users.new.name
 (2) users.name
-Please choose a key or enter one manually  |1|
+Please choose a key or enter one manually (or enter 'skip')  |1|
 
 To enter a freeform text key just enter it here. To choose another pre-chosen
 key, choose its number.  The value defaults to (1).
